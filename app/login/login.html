@@ -1,0 +1,12 @@
+<ActionBar title="Practice Buddy" icon=""></ActionBar>
+<ScrollView>
+  <StackLayout [class]="isLoggingIn ? 'card white' : 'card gray'">
+    <Image src="res://logo" stretch="none" horizontalAlignment="center"></Image>
+    <TextField #email hint="Email Address" keyboardType="email" [(ngModel)]="user.email" autocorrect="false" autocapitalizationType="none"></TextField>
+    <TextField #password hint="Password" secure="true" [(ngModel)]="user.password"></TextField>
+    <Button [text]="isLoggingIn ? 'Login' : 'Register'" class="submit-button white-text" (tap)="submit()"></Button>
+    <Button [text]="isLoggingIn ? 'Register' : 'Back to login'" (tap)="toggleDisplay()" class="link"></Button>
+    <Button horizontalAlignment="center" class="link forgot-password-label" text="Forgot password" (tap)="forgotPassword()" [opacity]="isLoggingIn ? 1 : 0"></Button>
+  </StackLayout>
+</ScrollView>
+

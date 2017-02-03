@@ -1,0 +1,111 @@
+@import url("~/platform.css");
+
+Page {
+  background-image: url("res://background");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  font-size: 15;
+}
+ActionBar {
+  background-color: #088FFC;
+  color: white;
+}
+Button {
+  background-color: #1598F6;
+  margin-left: 16;
+  margin-right: 16;
+  margin-bottom: 10;
+}
+TextField {
+  padding: 10;
+  font-size: 13;
+}
+.header {
+  margin-top: 5;
+  margin-bottom: 10;
+  font-size: 20;
+  font-weight: bold;
+  text-align:center;
+}
+
+.small-spacing {
+  margin: 5;
+}
+.medium-spacing {
+  margin: 10;
+}
+
+.card{
+  margin-top: 30;
+  margin-left: 10;
+  margin-right: 10;
+   padding:10;
+   vertical-align:top;
+   background-color: white;
+   border-width: 1;
+    border-radius: 5;
+    border-color: white;
+}
+
+.white-text {
+  color: white;
+}
+.link {
+  background-color: transparent;
+  color: #1598F6;
+}
+/*FAB button*/
+
+.fa {
+  font-family: FontAwesome, fontawesome-webfont;
+  font-size:20;
+}
+.speed-button {
+    height: 50;
+    width: 50;
+    font-size: 20;
+    text-align: center;
+    color: #fff;
+    border-radius: 25;
+    text-align: center;
+    vertical-align: bottom;
+}
+.green {
+  background-color: #10B671; 
+}
+.orange {
+  background-color: #F2B208; 
+}
+.red {
+  background-color: #F13030; 
+}
+.blue {
+  background-color: #1598F6; 
+}
+.redlabel{
+  color: #F13030;
+}
+.fab-button {
+    height: 70;
+    width: 70;
+    margin: 10;
+    background-color: #088FFC;
+    text-align: center;
+    vertical-align: bottom;
+}
+.action-btn{
+  background-color: #1598F6;    
+  margin-top: 5;
+  border-radius:2;
+}
+.list {
+  margin-top: 25;
+}
+
+.instrumentBackground {
+    height: 60;
+    width: 60;
+    background-color: #fff;
+    border-radius: 30;
+}

@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  padding: 0 16px;
+}
+
+TextField {
+  border-width: 1;
+  border-color: #72C1A5;
+  margin-bottom: 20;
+}
+Image {
+  margin-top: 5;
+  margin-bottom: 20;
+  text-align:center;
+}
+.logo-container {
+  text-align: center;
+}
+
+.submit-button{
+  padding: 10;
+  border-width: 1;
+  border-color: #1598F6;
+  border-radius: 5;
+}
+
+.nav-button{
+  visibility: collapse;
+}
+
+.white{
+  background-color: white;
+}
+.gray{
+  background-color: #fcffb2;
+  border-color: #fcffb2;
+}
+.forgot-password-label {
+  font-size: 13;
+  margin-left: 20;
+  margin-bottom: 45;
+  color: black;
+}

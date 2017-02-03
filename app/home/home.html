@@ -1,0 +1,43 @@
+<ActionBar title="Practice Buddy"></ActionBar>
+
+<StackLayout>
+ 
+   <GridLayout rows="*,auto,auto">
+
+    <ScrollView>
+        
+        <StackLayout class="card">
+          <StackLayout>            
+            <StackLayout>          
+              <Label class="header" text="Welcome!"></Label>          
+              <Label textWrap="true" text="Practice Buddy helps students become better musicians, and music teachers mentor their students."></Label>
+              <Label *ngIf="(students$ | async)?.length>0" textWrap="true" text="Students, tap your card to start your practicing!"></Label>    
+              <Label *ngIf="(students$ | async)?.length==0" style="font-weight: bold" textWrap="true" text="Looks like there are no students associated to this account."></Label>
+              <Button *ngIf="(students$ | async)?.length==0" class="btn blue" text="Add music students to this account" (tap)="addStudent()"></Button>
+              <Button *ngIf="(students$ | async)?.length==0" class="btn purple" text="I'm a teacher" (tap)="goToTeachersHome()"></Button>
+            </StackLayout>
+           	
+             <WrapLayout horizontalAlignment="center">
+              <StackLayout class="studentCard" width="45%" *ngFor="let student of (students$ | async)">
+                <StackLayout horizontalAlignment="center" (tap)="goToStudentHome(student.id)">            
+                  <Label horizontalAlignment="center" class="header" [text]="student.Name"></Label>
+                      <StackLayout class="instrumentBackground">
+                        <Image class="instrumentImage" [src]="'~/images/'+student.Instrument+'.png'" height="50"></Image>
+                      </StackLayout>
+                  <Label horizontalAlignment="center" textWrap="true" [text]="'Working towards: '+student.Reward"></Label>
+                </StackLayout>
+              </StackLayout>
+            </WrapLayout>            
+          </StackLayout>
+      </StackLayout>
+    </ScrollView>
+      
+      <Button row="1" #btna (tap)="addStudent()" [@state]=" isOpen ? 'activebtna' : 'inactivebtn' " [text]="'fa-plus' | fonticon" class="speed-button red fa"></Button>
+      <Button row="1" #btnd (tap)="goToTeachersHome()" [@state]=" isOpen ? 'activebtnb' : 'inactivebtn' " [text]="'fa-mortar-board' | fonticon" class="speed-button green fa"></Button>
+      <Button row="1" #btne (tap)="logout()" [@state]=" isOpen ? 'activebtnc' : 'inactivebtn' " [text]="'fa-sign-out' | fonticon" class="speed-button orange fa"></Button>
+     
+      <Fab verticalAlignment="bottom" row="1" #fab [@state]=" isOpen ? 'active' : 'inactive' " (tap)="onTap()" icon="./images/menu.png" rippleColor="#f1f1f1" class="fab-button"></Fab>
+    
+    </GridLayout> 
+ 
+ </StackLayout>
