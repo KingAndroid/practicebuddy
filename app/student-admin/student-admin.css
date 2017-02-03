@@ -1,0 +1,31 @@
+TextField {
+  margin-left: 16;
+  margin-right: 16;
+  margin-bottom: 10;
+  border-width: 1;
+  border-color: #72C1A5;
+  margin-bottom: 20;
+}
+.label {
+  margin: 10;
+}
+.visible {
+  animation-name: show;
+  animation-duration: 1s;
+}
+@keyframes show {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.delete-container {
+  padding: 5;
+  height: 20;
+  margin-right: 8;
+}
+
+.gray{
+  margin: 5;
+  background-color: #FAFAFA;
+  border-radius: 2;
+}

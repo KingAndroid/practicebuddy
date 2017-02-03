@@ -278,6 +278,19 @@ export class FirebaseService {
         });  
   }
 
+  //settings 
+  public saveSettings(student: StudentModel){
+    this.publishUpdates();
+    return firebase.update("/StudentSettings/"+student.id+"",{Name:student.Name, Instrument:student.Instrument, AdminPassword:student.AdminPassword, PracticesRequired:student.PracticesRequired, PracticeLength:student.PracticeLength, Reward:student.Reward, TeacherEmail:student.TeacherEmail, NotifyAll:student.NotifyAll})
+      .then(
+        function (result:any) {
+          return 'Student information saved!';
+        },
+        function (errorMessage:any) {
+          console.log(errorMessage);
+        });  
+  }
+
   handleSnapshot(data: any) {
     this._allItems = [];
     if (data) {

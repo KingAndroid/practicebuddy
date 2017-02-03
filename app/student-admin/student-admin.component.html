@@ -1,0 +1,87 @@
+<ActionBar title="{{ name }}'s Preferences" icon="">
+	<ActionItem (tap)="goHome()" ios.position="right">
+        <Button [text]="'fa-home' | fonticon" class="fa action-btn"></Button>
+    </ActionItem>
+</ActionBar>
+
+<ScrollView>
+
+	<StackLayout #container class="card">
+
+		<GridLayout columns="auto,10">
+			
+			<Label col="0" horizontalAlignment="left" row="0" class="label" text="Student's Name"></Label>
+		
+			<Label col="1" row="0" horizontalAlignment="left" class="redlabel" text="*"></Label>
+
+		</GridLayout>
+
+		<TextField #studentname hint="Student's Name" autocorrect="false" autocapitalizationType="none" [(ngModel)]="name"></TextField>
+
+		<StackLayout class="gray">
+
+			<GridLayout columns="auto,10">
+			
+				<Label col="0" horizontalAlignment="left" textWrap="true" row="0" class="label" text="Number of Practices Required for Reward"></Label>
+		
+				<Label col="1" row="0" horizontalAlignment="left" class="redlabel" text="*"></Label>
+
+			</GridLayout>
+
+			<Label #practicesrequiredlabel horizontalAlignment="center" class="label" [text]="practicesrequired|number:'2.1-0'"></Label>
+
+			<Slider class="label" #practicesrequiredslider [(ngModel)]="practicesrequired"></Slider>
+
+		</StackLayout>
+
+		<StackLayout class="gray">
+
+			<GridLayout columns="auto,10">
+			
+				<Label col="0" horizontalAlignment="left" row="0" textWrap="true" class="label" text="Length of Practices in Minutes"></Label>
+		
+				<Label col="1" row="0" horizontalAlignment="left" class="redlabel" text="*"></Label>
+
+			</GridLayout>
+
+			<Label #practicelengthlabel horizontalAlignment="center" class="label" [text]="practicelength|number:'2.1-0'"></Label>
+
+			<Slider class="label" #practicelengthslider [(ngModel)]="practicelength"></Slider>
+
+		</StackLayout>
+
+			<GridLayout columns="auto,10">
+			
+				<Label col="0" horizontalAlignment="left" row="0" textWrap="true" class="label" text="Reward for Practice Sequence Completion"></Label>
+		
+				<Label col="1" row="0" horizontalAlignment="left" class="redlabel" text="*"></Label>
+
+			</GridLayout>
+
+		<TextField hint="Reward" [(ngModel)]="reward" autocorrect="false" autocapitalizationType="none"></TextField>
+
+		<Label class="label" text="Password"></Label>
+
+		<TextField secure="true" [(ngModel)]="adminpassword" hint="Admin Password" autocorrect="false" autocapitalizationType="none"></TextField>
+
+		<StackLayout class="gray">
+
+			<Label textWrap="true" class="label" text="Notify your teacher via email of every practice activity"></Label>
+
+			<Switch #switch [checked]="notifyAll" (checkedChange)="selectedSwitchChanged(switch.checked)" class="switch"></Switch>
+			
+		</StackLayout>
+
+		<Label class="label" text="Teacher Email"></Label>		
+
+		<TextField [(ngModel)]="teacheremail" hint="Teacher's Email Address" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
+
+		<ListPicker #picker [items]="instruments" [selectedIndex]="instrument" 
+    		verticalAlignment="center" horizontalAlignment="center" 
+    		(selectedIndexChange)="selectedIndexChanged(picker)"></ListPicker>
+
+		<Button [text]="'Save'" class="submit-button white-text" (tap)="submit()"></Button>
+
+	</StackLayout>
+
+</ScrollView>
