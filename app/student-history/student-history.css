@@ -1,0 +1,19 @@
+.list {
+  padding-top: 30;
+}
+.line-item {
+  padding-top: 5;
+  padding-bottom: 5;
+  padding-left: 5;
+}
+.line-item-text {
+    padding-left: 10;
+}
+.historyBtn{
+  color: white;
+  border-width: 1;
+  border-radius: 5;   
+  border-color: white;
+  padding: 5;
+  margin-top: 5;
+}

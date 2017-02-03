@@ -1,0 +1,21 @@
+<ActionBar title="My Practice History" icon="">
+    <ActionItem (tap)="goHome()" ios.position="right">
+        <Button [text]="'fa-home' | fonticon" class="fa action-btn"></Button>
+    </ActionItem>
+</ActionBar>
+
+<ScrollView>
+  <ListView [items]="practices$ | async" class="list">
+    <template let-item="item">  
+        <StackLayout orientation="horizontal" class="line-item">
+          <GridLayout columns="1*,1*,1*,1*" rows="*">
+            <Button col="0" height="40" width="40" *ngIf="item.Comment" [text]="'fa-pencil' | fonticon" class="fa historyBtn orange" (tap)="viewComment(item.Comment)"></Button>
+            <Label col="1" class="line-item-text" [text]='item.Date | date:"shortDate"'></Label>
+            <Label col="2" [text]="' '+item.PracticeLength+' minutes'"></Label>
+            <Image col="3" width="50" *ngIf="item.Sticker" [src]="'~/assets/images/stickers/sticker'+item.Sticker+'.png'"></Image>           
+          </GridLayout>
+        </StackLayout>    
+    </template>
+  </ListView>
+</ScrollView>
+

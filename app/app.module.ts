@@ -10,6 +10,8 @@ import { FirebaseService, UtilsService, AuthGuard, BackendService } from "./serv
 import { LoginModule } from "./login/login.module";
 import { HomeModule } from "./home/home.module";
 import { StudentHomeModule } from "./student-home/student-home.module";
+import { StudentHistoryModule } from "./student-history/student-history.module";
+
 import { TeacherHomeModule } from "./teacher-home/teacher-home.module";
 import { TeacherStudentHomeModule } from "./teacher-student-home/teacher-student-home.module";
 
@@ -30,6 +32,7 @@ import { TeacherStudentHomeModule } from "./teacher-student-home/teacher-student
     LoginModule,
     HomeModule,
     StudentHomeModule,
+    StudentHistoryModule,
     TeacherHomeModule,
     TeacherStudentHomeModule
   ],
