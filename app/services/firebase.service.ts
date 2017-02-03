@@ -1,6 +1,5 @@
 import { Injectable, Inject, NgZone } from '@angular/core';
-var firebase = require("nativescript-plugin-firebase");
-//var LoadingIndicator = require("nativescript-loading-indicator").LoadingIndicator;
+import firebase = require("nativescript-plugin-firebase");
 import { LoadingIndicator } from "nativescript-loading-indicator";
 import * as appSettings from 'application-settings';
 import { RouterExtensions } from 'nativescript-angular/router';
@@ -15,6 +14,11 @@ import { UserModel, StudentModel, PracticeModel } from '../models';
 @Injectable()
 export class FirebaseService {
 
+  constructor(
+    private ngZone: NgZone,
+    //private utils: UtilsService
+  ) {}
+
   items: BehaviorSubject<Array<StudentModel>> = new BehaviorSubject([]);
   practiceitems: BehaviorSubject<Array<PracticeModel>> = new BehaviorSubject([]);
   teacherstudentsitems: BehaviorSubject<Array<StudentModel>> = new BehaviorSubject([]);
@@ -27,12 +31,6 @@ export class FirebaseService {
   private _allTeacherStudentsItems: Array<StudentModel> = [];
   private _allPracticeArchiveItems: Array<PracticeModel> = [];
 
-
-  constructor(
-    private ngZone: NgZone,
-
-  ) { }
-
   register(user: UserModel) {
     return firebase.createUser({
       email: user.email,
@@ -43,8 +41,7 @@ export class FirebaseService {
       },
       function (errorMessage: any) {
         alert(errorMessage);
-      }
-      )
+      })
   }
 
   login(user: UserModel) {
@@ -132,10 +129,91 @@ export class FirebaseService {
       });
   }
 
+  public getMyStudent(id: string): Observable<any> {
+    return new Observable((observer: any) => {
+      observer.next(this._allItems.filter(s => s.id === id)[0]);
+    }).share();
+  }
 
-  //utilities
+  /*public saveRecording(localPath: string, file?: any): Promise<any> {
+    let filename = this.utils.getFilename(localPath);
+    let remotePath = `${filename}`;
+    return firebase.uploadFile({
+      remoteFullPath: remotePath,
+      localFullPath: localPath
+    });
+  }*/
+
+  public deleteStudent(id: string) {
+    return firebase.remove("/StudentSettings/" + id + "")
+      .then(
+      //this.publishUpdates()
+      )
+      .catch(this.handleErrors);
+  }
+
+  public addPracticeTrack(id: string, track: string) {
+    this.publishUpdates();
+    return firebase.update("/Practices/" + id + "", { Track: track })
+      .then(
+      function (result: any) {
+        return 'Practice track added!';
+      },
+      function (errorMessage: any) {
+        console.log(errorMessage);
+      });
+  }
+
+  public getDownloadUrl(remoteFilePath: string): Promise<any> {
+    return firebase.getDownloadUrl({
+      remoteFullPath: remoteFilePath
+    })
+      .then(
+      function (url: string) {
+        return url;
+      },
+      function (errorMessage: any) {
+        console.log(errorMessage);
+      });
+  }
+
+  public writePractice(id: string, name: string, practicelength: number, teacheremail: string, track: string) {
+    this.publishUpdates();
+    return firebase.push("/Practices/", { StudentId: id, Name: name, Date: firebase.ServerValue.TIMESTAMP, PracticeLength: practicelength, TeacherEmail: teacheremail, Track: track })
+      .then(
+      function (result: any) {
+        return result;
+      },
+      function (errorMessage: any) {
+        console.log(errorMessage);
+      });
+  }
+  public clearPracticesCompleted(id: string) {
+    //sets practices to zero
+    this.publishUpdates();
+    return firebase.update("/StudentSettings/" + id + "", { PracticesCompleted: 0 })
+      .then(
+      function (result: any) {
+        return 'Congratulations! You completed a practice goal!';
+      },
+      function (errorMessage: any) {
+        console.log(errorMessage);
+      });
+  }
+
+  public incrementPracticesCompleted(id: string, currPracticesCompleted: number) {
+    this.publishUpdates();
+    return firebase.update("/StudentSettings/" + id + "", { PracticesCompleted: currPracticesCompleted })
+      .then(
+      function (result: any) {
+        return 'Student information saved!';
+      },
+      function (errorMessage: any) {
+        console.log(errorMessage);
+      });
+  }
+
   handleSnapshot(data: any) {
-    //empty array, then refill
     this._allItems = [];
     if (data) {
       for (let id in data) {
@@ -152,7 +230,6 @@ export class FirebaseService {
 
 
   publishUpdates() {
-    // must emit a *new* value (immutability!)
     this._allItems.sort(function (a, b) {
       if (a.Date < b.Date) return -1;
       if (a.Date > b.Date) return 1;

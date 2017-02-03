@@ -9,6 +9,7 @@ import { FirebaseService, UtilsService, AuthGuard, BackendService } from "./serv
 
 import { LoginModule } from "./login/login.module";
 import { HomeModule } from "./home/home.module";
+import { StudentHomeModule } from "./student-home/student-home.module";
 
 @NgModule({
   providers: [
@@ -24,7 +25,8 @@ import { HomeModule } from "./home/home.module";
     NativeScriptRouterModule,
     NativeScriptRouterModule.forRoot(appRoutes),
     LoginModule,
-    HomeModule
+    HomeModule,
+    StudentHomeModule
   ],
   declarations: [
       AppComponent,

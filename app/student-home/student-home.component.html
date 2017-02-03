@@ -1,0 +1,39 @@
+<ActionBar title="Welcome, {{ name }}">
+    <ActionItem (tap)="goHome()" ios.position="right">
+        <Button [text]="'fa-home' | fonticon" class="fa action-btn"></Button>
+    </ActionItem>
+</ActionBar>
+
+<ScrollView>
+    <StackLayout horizontalAlignment="center" class="card">
+
+        <GridLayout columns="*,*,*">
+            <Button col="0" [text]="'fa-pencil' | fonticon" class="fa btn blue" (tap)="editStudent(id)"></Button>
+            <Button col="1" [text]="'fa-history' | fonticon" class="fa btn blue" (tap)="goToHistory(id)"></Button>
+            <Button col="2" [text]="'fa-trash' | fonticon" class="fa btn blue" (tap)="deleteStudent(id)"></Button>
+        </GridLayout>
+
+        <Label textWrap="true" horizontalAlignment="center" class="header" text="You have completed {{practicescompleted}} out of {{practicesrequired}} required practices."></Label>
+        <Image src="~/assets/images/{{instrument}}.png" height="50"></Image>
+        <Label horizontalAlignment="center" textWrap="true" text="You're working towards: {{reward}}"></Label>
+        <Label horizontalAlignment="center" text="You're scheduled to practice for {{practicelength}} minutes."></Label>
+
+        <GridLayout horizontalAlignment="center" columns="auto,auto,auto" rows="*">
+            <Label col="0" horizontalAlignment="right" [text]="minutes$ | async" class="timer"></Label>
+            <Label col="1" horizontalAlignment="center" text=":" class="timer"></Label>
+            <Label col="2" horizontalAlignment="left" [text]="seconds$ | async" class="timer"></Label>
+        </GridLayout>
+        <Label textWrap="true" horizontalAlignment="center" text="Record one minute of your practice session"></Label>
+        <Button [text]="'fa-microphone' | fonticon" [class]="isRecording ? 'green fa fa-microphone btnRecord' : 'orange fa fa-microphone btnRecord'"
+            (tap)="toggleRecord()"></Button>
+        <Button width="96%" [class]="isTiming ? 'pulse btnTimer' : 'blue btnTimer'" [text]="isTiming ? 'Practicing!' : 'Start Practicing!'"
+            (tap)="startTimer()"></Button>
+
+        <GridLayout horizontalAlignment="center" columns="*,*" rows="*">
+            <Button width="48%" col="0" class="orange btnTimer" text="Pause" (tap)="pauseTimer()"></Button>
+            <Button width="48%" col="1" class="red btnTimer" text="Reset" (tap)="resetTimer()"></Button>
+        </GridLayout>
+
+    </StackLayout>
+</ScrollView>
+
