@@ -1,0 +1,18 @@
+.studentCard {
+    margin: 5;
+    color: #FFF;
+    vertical-align:top;
+    background-color: #A409FE;
+    border-width: 1;
+    border-radius: 5;
+    border-color: #A409FE;
+}
+
+.archive-button {
+    background-color: #10B671;
+    border-radius: 5;
+    font-size: 20;
+    color: #FFF;
+    height: 40;
+    margin: 2;
+}

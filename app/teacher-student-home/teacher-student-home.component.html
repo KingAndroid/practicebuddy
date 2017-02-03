@@ -1,0 +1,35 @@
+<ActionBar title="{{name}}'s Practices">
+    <ActionItem (tap)="goHome()" ios.position="right">
+        <Button [text]="'fa-home' | fonticon" class="fa"></Button>
+    </ActionItem>
+</ActionBar>
+
+
+<ScrollView>
+
+  
+ <StackLayout horizontalAlignment="center" class="card">
+   <Label style="color:black" textWrap="true" text="Practice sessions for you to review. If there are none listed, there may be nothing new or they have all been archived."></Label>                       
+  <WrapLayout horizontalAlignment="center">    
+    <StackLayout class="studentCard" *ngFor="let practice of (studentpractices$ | async)">
+      <StackLayout class="innerCard" horizontalAlignment="center" *ngIf="!practice.Archive">
+        <GridLayout columns="*,*,*">
+          <Button col="0" [text]="'fa-pencil' | fonticon" class="fa action-btn" (tap)="addComment(practice.id)"></Button>
+          <Button col="1" [text]="'fa-trophy' | fonticon" class="fa action-btn" (tap)="addAward(practice.id)"></Button>
+          <Button col="2" [text]="'fa-history' | fonticon" class="fa action-btn" (tap)="markComplete(practice.id)"></Button>
+        </GridLayout>
+        <GridLayout columns="*,*" colspan="3">                  
+          <Button col="0" *ngIf="practice.Track" [text]="'fa-play' | fonticon" class="fa btnPlay" (tap)="playTrack(practice)"></Button>
+          <Button col="1" *ngIf="practice.Track" [text]="'fa-stop' | fonticon" class="fa btnStop" (tap)="stopTrack()"></Button>
+        </GridLayout>
+        <!--<PlayPause *ngIf="practice.Track" #PlayPause width="50" height="50" buttonColor="#6E09F5" buttonBgColor="#ffffff" col="0" (playPauseTap)="playPractice(practice.Track)"></PlayPause>-->
+        <Label horizontalAlignment="center" textWrap="true" text="Practiced on {{practice.Date | date:mediumDate}} for {{practice.PracticeLength}} minutes."></Label>
+        <Label *ngIf="practice.Comment" horizontalAlignment="center" textWrap="true" text="My comment: {{practice.Comment}}"></Label>
+        <Label *ngIf="practice.Sticker" horizontalAlignment="center" textWrap="true" text="Sticker awarded:"></Label>
+        <Image *ngIf="practice.Sticker" width="50" [src]="'~/assets/images/stickers/sticker'+practice.Sticker+'.png'"></Image>
+
+      </StackLayout>
+    </StackLayout>
+  </WrapLayout>
+ </StackLayout>
+</ScrollView>

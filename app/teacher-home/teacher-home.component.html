@@ -1,0 +1,33 @@
+<ActionBar title="Teachers">
+   <ActionItem (tap)="goHome()" ios.position="right">
+        <Button [text]="'fa-home' | fonticon" class="fa action-btn"></Button>
+    </ActionItem>
+</ActionBar>
+
+<StackLayout>    
+    <ScrollView>
+        <StackLayout class="card">
+          <StackLayout>
+            
+            <StackLayout>          
+              <Label class="header" text="Welcome!"></Label>          
+              <Label textWrap="true" text="If you see names listed in the cards below, you have students who have listed you as their teacher! Tap a card to get student practice information."></Label>
+              <Button class="archive-button" text="View Student Archive" (tap)="viewArchive()"></Button>
+            </StackLayout>
+           	
+             <WrapLayout horizontalAlignment="center">
+              <StackLayout class="studentCard" width="45%" *ngFor="let student of (teacherstudents$ | async)">
+                <StackLayout horizontalAlignment="center" (tap)="goToTeacherStudentHome(student)">
+                  <Label horizontalAlignment="center" class="header" [text]="student.Name"></Label>
+                  <StackLayout class="instrumentBackground">
+                    <Image [src]="'~/images/'+student.Instrument+'.png'" height="50"></Image>
+                  </StackLayout>
+                  <Label horizontalAlignment="center" textWrap="true" [text]="'Completed '+student.PracticesCompleted+' of '+student.PracticesRequired+' practices'"></Label>
+                </StackLayout>
+              </StackLayout>
+            </WrapLayout>
+            
+          </StackLayout>
+      </StackLayout>
+    </ScrollView> 
+ </StackLayout>

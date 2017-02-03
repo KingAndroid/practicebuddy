@@ -1,27 +1,24 @@
-import { getString, setString } from "application-settings";
-
-const tokenKey = "token";
-const emailKey = "email";
 
 export class BackendService {
+  
+  public static token:string;
+  public static email:string;
 
-static isLoggedIn(): boolean {
-    return !!getString("token");
+  public static isLoggedIn(): boolean {
+    return !!BackendService.token;
   }
 
-  static get token(): string {
-    return getString("token");
+  public static getToken():any {
+    return BackendService.token;
+  }
+    
+  public static hasActiveToken():any {
+    return !!BackendService.token;
   }
 
-  static set token(theToken: string) {
-    setString("token", theToken);
+  public static invalidateToken() {
+    BackendService.token = "";
+    BackendService.email = "";
   }
 
-  static get email(): string {
-      return getString("email");
-  }
-
-  static set email(theEmail: string){
-      setString("email", theEmail);
-  }
 }

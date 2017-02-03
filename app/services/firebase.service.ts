@@ -17,7 +17,7 @@ export class FirebaseService {
   constructor(
     private ngZone: NgZone,
     //private utils: UtilsService
-  ) {}
+  ) { }
 
   items: BehaviorSubject<Array<StudentModel>> = new BehaviorSubject([]);
   practiceitems: BehaviorSubject<Array<PracticeModel>> = new BehaviorSubject([]);
@@ -53,7 +53,7 @@ export class FirebaseService {
     }).then((result: any) => {
       this.loader.hide();
       BackendService.token = result.uid;
-      //BackendService.email = result.user.email;
+      BackendService.email = result.email;
       return JSON.stringify(result);
     }, (errorMessage: any) => {
       this.loader.hide();
@@ -62,8 +62,7 @@ export class FirebaseService {
   }
 
   logout() {
-    BackendService.token = "";
-    BackendService.email = "";
+    BackendService.invalidateToken();
     firebase.logout();
   }
 
@@ -213,6 +212,72 @@ export class FirebaseService {
       });
   }
 
+  //teacher 
+  public getTeacherStudents(): Observable<any> {
+    //this gets the students associated to the account
+    return new Observable((observer: any) => {
+      let path = 'StudentSettings';
+      let listener: any;
+
+      this.loader.show({ message: 'Finding Students...' });
+
+      let onValueEvent = (snapshot: any) => {
+        this.ngZone.run(() => {
+          let results = this.handleTeacherStudentsSnapshot(snapshot.value, path);
+          observer.next(results);
+        });
+      };
+      firebase.addValueEventListener(onValueEvent, `/${path}`).then(() => {
+        this.loader.hide();
+      });
+    }).share();
+  }
+
+  //teacher student home
+  public getMyPractices(id:string): Observable<any> {
+    //this gets the practices associated to a student
+    return new Observable((observer: any) => {
+      let path = 'Practices';
+      let listener: any;          
+        this.loader.show({ message: 'Finding Practices...' });
+          
+        let onValueEvent = (snapshot: any) => {
+          this.ngZone.run(() => {
+            let results = this.handlePracticeSnapshot(id,snapshot.value, path);
+             observer.next(results);
+          });
+        };
+
+        firebase.addValueEventListener(onValueEvent, `/${path}`).then(() => {
+          this.loader.hide();
+        });        
+    }).share();
+  }
+
+  public addComment(id:string, comment: string){
+    this.publishUpdates();
+    return firebase.update("/Practices/"+id+"",{Comment: comment})
+      .then(
+        function (result:any) {
+          return 'Practice Commented!';
+        },
+        function (errorMessage:any) {
+          console.log(errorMessage);
+        });  
+  }
+
+  public markComplete(id:string){
+    this.publishUpdates();
+    return firebase.update("/Practices/"+id+"",{Archive: true})
+      .then(
+        function (result:any) {
+          return 'Practice Archived!';
+        },
+        function (errorMessage:any) {
+          console.log(errorMessage);
+        });  
+  }
+
   handleSnapshot(data: any) {
     this._allItems = [];
     if (data) {
@@ -227,6 +292,36 @@ export class FirebaseService {
     return this._allItems;
   }
 
+  handleTeacherStudentsSnapshot(data: any, path?: string) {
+    this._allTeacherStudentsItems = [];
+    if (path)
+      if (data) {
+        for (let id in data) {
+          let result = (<any>Object).assign({ id: id }, data[id]);
+          if (BackendService.email === result.TeacherEmail) {
+            this._allTeacherStudentsItems.push(result);
+          }
+        }
+        this.publishTeacherStudentsUpdates();
+      }
+    return this._allTeacherStudentsItems;
+  }
+
+  handlePracticeSnapshot(studentId: string, data: any, path?: string) {
+    this._allPracticeItems = [];
+    if (path)
+    if (data) {
+      for (let id in data) {
+        let result = (<any>Object).assign({id: id}, data[id]);
+        if(studentId === result.StudentId){
+          this._allPracticeItems.push(result);
+        }
+        
+      }
+      this.publishPracticeUpdates();
+    }
+    return this._allPracticeItems;
+  }
 
 
   publishUpdates() {
@@ -236,6 +331,24 @@ export class FirebaseService {
       return 0;
     })
     this.items.next([...this._allItems]);
+  }
+
+  publishTeacherStudentsUpdates() {
+    this._allTeacherStudentsItems.sort(function (a, b) {
+      if (a.Date < b.Date) return -1;
+      if (a.Date > b.Date) return 1;
+      return 0;
+    })
+    this.teacherstudentsitems.next([...this._allTeacherStudentsItems]);
+  }
+
+  publishPracticeUpdates() {
+    this._allPracticeItems.sort(function(a, b){
+        if(a.Date > b.Date) return -1;
+        if(a.Date < b.Date) return 1;
+      return 0;
+    })
+    this.practiceitems.next([...this._allPracticeItems]);
   }
 
   handleErrors(error) {
