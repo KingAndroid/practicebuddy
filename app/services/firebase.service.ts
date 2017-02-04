@@ -291,6 +291,44 @@ export class FirebaseService {
         });  
   }
 
+   //stickers
+  public addAward(id:string, stickerId: number){
+    this.publishUpdates();
+    return firebase.update("/Practices/"+id+"",{Sticker: stickerId})
+      .then(
+        function (result:any) {
+          return 'Sticker Added!';
+        },
+        function (errorMessage:any) {
+          console.log(errorMessage);
+        });  
+  }
+
+  //teacher student archive 
+
+  public getArchivedPractices(): Observable<any> {
+    //this gets the practices associated to a teacher
+    return new Observable((observer: any) => {
+      let path = 'Practices';
+      let listener: any;
+          
+        this.loader.show({ message: 'Finding Practices...' });
+          
+        let onValueEvent = (snapshot: any) => {
+          this.ngZone.run(() => {
+            let results = this.handlePracticeArchiveSnapshot(snapshot.value, path);
+             observer.next(results);
+          });
+        };
+
+        firebase.addValueEventListener(onValueEvent, `/${path}`).then(() => {
+          this.loader.hide();
+        });
+    }).share();
+  }
+
+  //utilities
+
   handleSnapshot(data: any) {
     this._allItems = [];
     if (data) {
@@ -336,6 +374,21 @@ export class FirebaseService {
     return this._allPracticeItems;
   }
 
+  handlePracticeArchiveSnapshot(data: any, path?: string) {
+    //empty array, then refill
+    this._allPracticeArchiveItems = [];
+    if (path)
+    if (data) {
+      for (let id in data) {
+        let result = (<any>Object).assign({id: id}, data[id]);
+        if(BackendService.email === result.TeacherEmail && result.Archive){
+            this._allPracticeArchiveItems.push(result);
+        }
+      }
+      this.publishPracticeArchiveUpdates();
+    }
+    return this._allPracticeArchiveItems;
+  }
 
   publishUpdates() {
     this._allItems.sort(function (a, b) {
@@ -362,6 +415,15 @@ export class FirebaseService {
       return 0;
     })
     this.practiceitems.next([...this._allPracticeItems]);
+  }
+
+  publishPracticeArchiveUpdates() {
+    this._allPracticeArchiveItems.sort(function(a, b){
+        if(a.Date > b.Date) return -1;
+        if(a.Date < b.Date) return 1;
+      return 0;
+    })
+    this.practicearchiveitems.next([...this._allPracticeArchiveItems]);
   }
 
   handleErrors(error) {

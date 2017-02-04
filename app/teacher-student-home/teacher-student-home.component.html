@@ -22,7 +22,6 @@
           <Button col="0" *ngIf="practice.Track" [text]="'fa-play' | fonticon" class="fa btnPlay" (tap)="playTrack(practice)"></Button>
           <Button col="1" *ngIf="practice.Track" [text]="'fa-stop' | fonticon" class="fa btnStop" (tap)="stopTrack()"></Button>
         </GridLayout>
-        <!--<PlayPause *ngIf="practice.Track" #PlayPause width="50" height="50" buttonColor="#6E09F5" buttonBgColor="#ffffff" col="0" (playPauseTap)="playPractice(practice.Track)"></PlayPause>-->
         <Label horizontalAlignment="center" textWrap="true" text="Practiced on {{practice.Date | date:mediumDate}} for {{practice.PracticeLength}} minutes."></Label>
         <Label *ngIf="practice.Comment" horizontalAlignment="center" textWrap="true" text="My comment: {{practice.Comment}}"></Label>
         <Label *ngIf="practice.Sticker" horizontalAlignment="center" textWrap="true" text="Sticker awarded:"></Label>

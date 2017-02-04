@@ -1,13 +1,13 @@
 {
     "private": false,
     "nativescript": {
-        "id": "org.nativescript.yowwlr"
+        "id": "com.ladeezfirstmedia.practicebuddy"
     },
-    "name": "Yowwlr",
+    "name": "PracticeBuddy",
     "main": "main.js",
     "version": "2.4.3",
     "author": "Telerik <support@telerik.com>",
-    "description": "Twitter for Cats",
+    "description": "Practice Buddy for music students and their teachers",
     "license": "BSD",
     "keywords": [
         "telerik",

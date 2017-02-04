@@ -1,0 +1,19 @@
+<ActionBar title="Award a Sticker">
+    <ActionItem (tap)="goHome()" ios.position="right">
+        <Button [text]="'fa-home' | fonticon" class="fa action-btn"></Button>
+    </ActionItem>
+</ActionBar>
+
+<ScrollView>
+
+<StackLayout class="card">
+  
+  <Label textWrap="true" text="Choose a sticker to award it to your student for this practice"></Label>
+  
+  <WrapLayout horizontalAlignment="center">
+    <Image class="sticker" *ngFor="let sticker of (stickerList)" (tap)="selectSticker(sticker)" [src]="'~/assets/images/stickers/sticker'+sticker+'.png'"></Image>
+  </WrapLayout>
+
+</StackLayout>  
+ 
+</ScrollView>

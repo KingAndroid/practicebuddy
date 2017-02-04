@@ -26,4 +26,5 @@ import firebase = require("nativescript-plugin-firebase");
      }
  );
 registerElement("Fab", () => require("nativescript-floatingactionbutton").Fab);
+//registerElement("PlayPause", () => require("nativescript-play-pause-button").PlayPauseButton);
 platformNativeScriptDynamic().bootstrapModule(AppModule);
