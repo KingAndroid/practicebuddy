@@ -15,8 +15,7 @@ import { UserModel, StudentModel, PracticeModel } from '../models';
 export class FirebaseService {
 
   constructor(
-    private ngZone: NgZone,
-    //private utils: UtilsService
+    private ngZone: NgZone
   ) { }
 
   items: BehaviorSubject<Array<StudentModel>> = new BehaviorSubject([]);
@@ -70,7 +69,7 @@ export class FirebaseService {
     return firebase.resetPassword({
       email: email
     }).then((result: any) => {
-      alert(JSON.stringify(result));
+      return 'Please check your email for the password reset instructions';
     },
       function (errorMessage: any) {
         alert(errorMessage);
@@ -121,7 +120,7 @@ export class FirebaseService {
       }
     ).then(
       function (result: any) {
-        return 'Student added!';
+        return 'Student added!';       
       },
       function (errorMessage: any) {
         console.log(errorMessage);
@@ -134,14 +133,17 @@ export class FirebaseService {
     }).share();
   }
 
-  /*public saveRecording(localPath: string, file?: any): Promise<any> {
-    let filename = this.utils.getFilename(localPath);
+  public saveRecording(localPath: string, file?: any): Promise<any> {
+    let filename = UtilsService.getFilename(localPath);
     let remotePath = `${filename}`;
     return firebase.uploadFile({
       remoteFullPath: remotePath,
-      localFullPath: localPath
+      localFullPath: localPath,
+      onProgress: function(status) {
+        //this.loader.show({ message: "Percentage complete: " + status.percentageCompleted });
+      }
     });
-  }*/
+  }
 
   public deleteStudent(id: string) {
     return firebase.remove("/StudentSettings/" + id + "")

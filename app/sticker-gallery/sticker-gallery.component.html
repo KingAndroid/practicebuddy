@@ -11,7 +11,7 @@
   <Label textWrap="true" text="Choose a sticker to award it to your student for this practice"></Label>
   
   <WrapLayout horizontalAlignment="center">
-    <Image class="sticker" *ngFor="let sticker of (stickerList)" (tap)="selectSticker(sticker)" [src]="'~/assets/images/stickers/sticker'+sticker+'.png'"></Image>
+    <Image class="sticker" *ngFor="let sticker of (stickerList)" (tap)="selectSticker(sticker)" [src]="'~/images/stickers/sticker'+sticker+'.png'"></Image>
   </WrapLayout>
 
 </StackLayout>  

@@ -5,7 +5,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 
 import { authProviders, appRoutes } from "./app.routes";
 import { AppComponent } from "./app.component";
-import { FirebaseService, UtilsService, AuthGuard, BackendService } from "./services";
+import { FirebaseService, UtilsService, BackendService } from "./services";
 
 import { LoginModule } from "./login/login.module";
 import { HomeModule } from "./home/home.module";
@@ -15,13 +15,15 @@ import { StudentAdminModule } from "./student-admin/student-admin.module";
 
 import { TeacherHomeModule } from "./teacher-home/teacher-home.module";
 import { TeacherStudentHomeModule } from "./teacher-student-home/teacher-student-home.module";
+import { TeacherStudentArchiveModule } from "./teacher-student-archive/teacher-student-archive.module";
+
+import { StickerGalleryModule } from "./sticker-gallery/sticker-gallery.module";
 
 
 @NgModule({
   providers: [
     FirebaseService,
     UtilsService,
-    AuthGuard,
     BackendService,
     authProviders
   ],
@@ -36,7 +38,9 @@ import { TeacherStudentHomeModule } from "./teacher-student-home/teacher-student
     StudentHistoryModule,
     StudentAdminModule,
     TeacherHomeModule,
-    TeacherStudentHomeModule
+    TeacherStudentHomeModule,
+    StickerGalleryModule,
+    TeacherStudentArchiveModule
   ],
   declarations: [
       AppComponent,

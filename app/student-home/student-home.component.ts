@@ -76,7 +76,6 @@ export class StudentHomeComponent implements OnInit, OnDestroy {
     private firebaseService: FirebaseService,
     private router: Router,
     private ngZone: NgZone,
-    private utils: UtilsService,
     private http: Http
   ) {
     this.player = new audio.TNSPlayer();
@@ -162,7 +161,7 @@ deleteStudent(id:string){
 
        this.recorderOptions = {
 
-        filename: this.utils.documentsPath(`recording-${Date.now()}.m4a`),
+        filename: UtilsService.documentsPath(`recording-${Date.now()}.m4a`),
     
         infoCallback: () => {
         },
@@ -201,7 +200,7 @@ deleteStudent(id:string){
   }
 
   stopRecorder(options){
-    /*timer.clearInterval(this.myRecordingTimer);
+    timer.clearInterval(this.myRecordingTimer);
     if (this.isRecording) {
       this.recorder.stop(options).then(() => {
         this.isRecording = false;
@@ -235,7 +234,7 @@ deleteStudent(id:string){
         this.isRecording = true;
     });
   }
-  this.isRecording = false; */   
+  this.isRecording = false;   
 }
 
 

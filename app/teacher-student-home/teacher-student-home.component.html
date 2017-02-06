@@ -25,7 +25,7 @@
         <Label horizontalAlignment="center" textWrap="true" text="Practiced on {{practice.Date | date:mediumDate}} for {{practice.PracticeLength}} minutes."></Label>
         <Label *ngIf="practice.Comment" horizontalAlignment="center" textWrap="true" text="My comment: {{practice.Comment}}"></Label>
         <Label *ngIf="practice.Sticker" horizontalAlignment="center" textWrap="true" text="Sticker awarded:"></Label>
-        <Image *ngIf="practice.Sticker" width="50" [src]="'~/assets/images/stickers/sticker'+practice.Sticker+'.png'"></Image>
+        <Image *ngIf="practice.Sticker" width="50" [src]="'~/images/stickers/sticker'+practice.Sticker+'.png'"></Image>
 
       </StackLayout>
     </StackLayout>
