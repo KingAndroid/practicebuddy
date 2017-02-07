@@ -23,8 +23,8 @@ export class LoginComponent {
               private router: Router
             ) {
               this.user = new UserModel();
-              this.user.email = "user@nativescript.org";
-              this.user.password = "password";
+              this.user.email = "";
+              this.user.password = "";
             }
 
  
