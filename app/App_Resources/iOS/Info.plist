@@ -6,16 +6,16 @@
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>PracticeBuddy</string>
-	<key>CFBundleExecutable</key>
-	<string>PracticeBuddy</string>	
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>${PRODUCT_NAME}</string>
+	<key>CFBundleExecutable</key>
+	<string>PracticeBuddy</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>AAPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.0</string>
+	<string>4.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
