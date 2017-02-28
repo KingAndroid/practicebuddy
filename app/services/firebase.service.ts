@@ -221,12 +221,13 @@ export class FirebaseService {
       let path = 'StudentSettings';
       let listener: any;
 
-      this.loader.show({ message: 'Finding Students...' });
+      this.loader.show({ message: 'Finding My Students...' });
 
       let onValueEvent = (snapshot: any) => {
         this.ngZone.run(() => {
-          let results = this.handleTeacherStudentsSnapshot(snapshot.value, path);
+          let results = this.handleTeacherStudentsSnapshot(snapshot.value);
           observer.next(results);
+          this.loader.hide();
         });
       };
       firebase.addValueEventListener(onValueEvent, `/${path}`).then(() => {
@@ -345,9 +346,8 @@ export class FirebaseService {
     return this._allItems;
   }
 
-  handleTeacherStudentsSnapshot(data: any, path?: string) {
+  handleTeacherStudentsSnapshot(data: any) {
     this._allTeacherStudentsItems = [];
-    if (path)
       if (data) {
         for (let id in data) {
           let result = (<any>Object).assign({ id: id }, data[id]);
