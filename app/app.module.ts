@@ -1,5 +1,6 @@
-import { NativeScriptModule } from "nativescript-angular/platform";
+import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NgModule } from "@angular/core";
+import { NativeScriptAnimationsModule } from "nativescript-angular/animations";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 
@@ -29,6 +30,7 @@ import { StickerGalleryModule } from "./sticker-gallery/sticker-gallery.module";
   ],
   imports: [
     NativeScriptModule,
+    NativeScriptAnimationsModule,
     NativeScriptHttpModule,
     NativeScriptRouterModule,
     NativeScriptRouterModule.forRoot(appRoutes),

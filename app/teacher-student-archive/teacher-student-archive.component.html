@@ -1,6 +1,6 @@
 <ActionBar title="My Students' Practices">
    <ActionItem (tap)="goHome()" ios.position="right">
-        <Button [text]="'fa-home' | fonticon" class="fa action-btn"></Button>
+        <Button [text]="'fa-home' | fonticon" class="fa btn"></Button>
     </ActionItem>
 </ActionBar>
 
@@ -8,7 +8,7 @@
   
   <ListView
     [items]="archivedstudentpractices$ | async" class="list">
-    <template let-item="item">  
+    <ng-template let-item="item">  
         <StackLayout orientation="horizontal" class="line-item">
           <GridLayout columns="1*,1*,1*,1*" rows="*">
             <Label col="0" class="line-item-text" [text]='item.Name'></Label>
@@ -17,7 +17,7 @@
             <Label col="3" textWrap="true" [text]='item.Comment'></Label>
           </GridLayout>
         </StackLayout>    
-    </template>
+    </ng-template>
   </ListView>
  
 </ScrollView>

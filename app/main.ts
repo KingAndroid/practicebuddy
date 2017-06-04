@@ -5,6 +5,7 @@ import { AppModule } from "./app.module";
 import { BackendService } from "./services";
 const dialogs = require("ui/dialogs");
 import firebase = require("nativescript-plugin-firebase");
+import application = require("application");
 
  firebase.init({
    persist: false,
@@ -25,6 +26,7 @@ import firebase = require("nativescript-plugin-firebase");
        console.log("firebase.init error: " + error);
      }
  );
+
 registerElement("Fab", () => require("nativescript-floatingactionbutton").Fab);
 //registerElement("PlayPause", () => require("nativescript-play-pause-button").PlayPauseButton);
 platformNativeScriptDynamic().bootstrapModule(AppModule);

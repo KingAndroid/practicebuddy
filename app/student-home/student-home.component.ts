@@ -63,7 +63,7 @@ export class StudentHomeComponent implements OnInit, OnDestroy {
   private recorder: any;
   private recorderOptions: any;
   //mail
-  private mailgunUrl: string = "practicebuddy.mailgun.org";
+  private mailgunUrl: string = "post.ladeezfirstmedia.com";
   private apiKey: string = "YXBpOmtleS00czhpbjNqY3pjNW1uMDNpYWZmejJmempxYzFjNWI5NQ==";
   //timer
   public minutes$: BehaviorSubject<number> = new BehaviorSubject(0);
@@ -147,7 +147,7 @@ deleteStudent(id:string){
           });
     } })
     ];
-    TNSFancyAlert.showCustomButtons(buttons, 'alert.png', '#F28600', 'Delete?', `Are you sure you want to delete this student?.`, 'Ok');
+    TNSFancyAlert.showCustomButtons(buttons, 'alert.png', '#F28600', 'Delete?', `Are you sure you want to delete this student?`, 'Ok');
 
 
 }
