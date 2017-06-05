@@ -12,7 +12,6 @@
             <StackLayout>          
               <Label class="header" text="Welcome!"></Label>          
               <Label textWrap="true" text="If you see names listed in the cards below, you have students who have listed you as their teacher! Tap a card to get student practice information."></Label>
-              <Button class="archive-button" text="View Student Archive" (tap)="viewArchive()"></Button>
             </StackLayout>
            	
              <WrapLayout horizontalAlignment="center">
@@ -26,7 +25,9 @@
                 </StackLayout>
               </StackLayout>
             </WrapLayout>
-            
+              
+              <Button class="archive-button" text="View Student Archive" (tap)="viewArchive()"></Button>
+
           </StackLayout>
       </StackLayout>
     </ScrollView> 

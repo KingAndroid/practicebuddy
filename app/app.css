@@ -55,7 +55,6 @@ TextField {
   background-color: transparent;
   color: #1598F6;
 }
-/*FAB button*/
 
 .fa {
   font-family: FontAwesome, fontawesome-webfont;
@@ -85,14 +84,6 @@ TextField {
 }
 .redlabel{
   color: #F13030;
-}
-.fab-button {
-    height: 70;
-    width: 70;
-    margin: 10;
-    background-color: #088FFC;
-    text-align: center;
-    vertical-align: bottom;
 }
 .action-btn{
   background-color: #1598F6;    

@@ -92,13 +92,11 @@ export class FirebaseService {
         this.ngZone.run(() => {
           let results = this.handleSnapshot(snapshot.value);
           observer.next(results);
-          this.loader.hide();
+          //this.loader.hide();
         });
       };
 
-      firebase.addValueEventListener(onValueEvent, `/${path}`).then(() => {
-        this.loader.hide();
-      });
+      firebase.addValueEventListener(onValueEvent, `/${path}`);
     }).share();
   }
 
@@ -120,7 +118,8 @@ export class FirebaseService {
       }
     ).then(
       function (result: any) {
-        return 'Student added!';       
+        console.log(result)
+        return 'Student added!';
       },
       function (errorMessage: any) {
         console.log(errorMessage);
@@ -227,11 +226,11 @@ export class FirebaseService {
         this.ngZone.run(() => {
           let results = this.handleTeacherStudentsSnapshot(snapshot.value);
           observer.next(results);
-          this.loader.hide();
+          //this.loader.hide();
         });
       };
       firebase.addValueEventListener(onValueEvent, `/${path}`).then(() => {
-        this.loader.hide();
+        //this.loader.hide();
       });
     }).share();
   }
@@ -252,7 +251,7 @@ export class FirebaseService {
         };
 
         firebase.addValueEventListener(onValueEvent, `/${path}`).then(() => {
-          this.loader.hide();
+          //this.loader.hide();
         });        
     }).share();
   }
@@ -325,7 +324,7 @@ export class FirebaseService {
         };
 
         firebase.addValueEventListener(onValueEvent, `/${path}`).then(() => {
-          this.loader.hide();
+          //this.loader.hide();
         });
     }).share();
   }
@@ -399,6 +398,7 @@ export class FirebaseService {
       return 0;
     })
     this.items.next([...this._allItems]);
+    this.loader.hide();
   }
 
   publishTeacherStudentsUpdates() {
@@ -408,6 +408,7 @@ export class FirebaseService {
       return 0;
     })
     this.teacherstudentsitems.next([...this._allTeacherStudentsItems]);
+    this.loader.hide();
   }
 
   publishPracticeUpdates() {
@@ -417,6 +418,7 @@ export class FirebaseService {
       return 0;
     })
     this.practiceitems.next([...this._allPracticeItems]);
+    this.loader.hide();
   }
 
   publishPracticeArchiveUpdates() {
@@ -426,6 +428,7 @@ export class FirebaseService {
       return 0;
     })
     this.practicearchiveitems.next([...this._allPracticeArchiveItems]);
+    this.loader.hide();
   }
 
   handleErrors(error) {

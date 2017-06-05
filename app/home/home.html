@@ -1,4 +1,8 @@
-<ActionBar title="Practice Buddy"></ActionBar>
+<ActionBar title="Practice Buddy">
+  <ActionItem (tap)="logout()" ios.position="right">
+        <Button [text]="'fa-sign-out' | fonticon" class="fa btn"></Button>
+    </ActionItem>
+</ActionBar>
 
 <StackLayout>
  
@@ -7,7 +11,14 @@
     <ScrollView>
         
         <StackLayout class="card">
-          <StackLayout>            
+          <StackLayout>  
+
+             <GridLayout columns="*,*">
+                <Button col="0" [text]="'fa-plus' | fonticon" class="fa btn blue" (tap)="addStudent()"></Button>
+                <Button col="1" [text]="'fa-mortar-board' | fonticon" class="fa btn green" (tap)="goToTeachersHome()"></Button>
+            </GridLayout>
+
+
             <StackLayout>          
               <Label class="header" text="Welcome!"></Label>          
               <Label textWrap="true" text="Practice Buddy helps students become better musicians, and music teachers mentor their students."></Label>
@@ -31,13 +42,7 @@
           </StackLayout>
       </StackLayout>
     </ScrollView>
-      
-      <Button row="1" #btna (tap)="addStudent()" [@state]=" isOpen ? 'activebtna' : 'inactivebtn' " [text]="'fa-plus' | fonticon" class="speed-button red fa"></Button>
-      <Button row="1" #btnd (tap)="goToTeachersHome()" [@state]=" isOpen ? 'activebtnb' : 'inactivebtn' " [text]="'fa-mortar-board' | fonticon" class="speed-button green fa"></Button>
-      <Button row="1" #btne (tap)="logout()" [@state]=" isOpen ? 'activebtnc' : 'inactivebtn' " [text]="'fa-sign-out' | fonticon" class="speed-button orange fa"></Button>
-     
-      <Fab verticalAlignment="bottom" row="1" #fab [@state]=" isOpen ? 'active' : 'inactive' " (tap)="onTap()" icon="./images/menu.png" rippleColor="#f1f1f1" class="fab-button"></Fab>
-    
+   
     </GridLayout> 
  
  </StackLayout>

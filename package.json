@@ -4,7 +4,7 @@
   "readme": "NativeScript Application",
   "repository": "<fill-your-repository-here>",
   "nativescript": {
-    "id": "com.ladeezfirstmedia.practicebuddy",
+    "id": "com.ladeezfirstmedia.quicknoms",
     "tns-ios": {
       "version": "3.0.1"
     }
@@ -22,7 +22,6 @@
     "nativescript-angular": "3.0.0",
     "nativescript-audio": "^3.4.2",
     "nativescript-fancyalert": "^1.1.2",
-    "nativescript-floatingactionbutton": "^3.0.0",
     "nativescript-insomnia": "^1.2.1",
     "nativescript-iqkeyboardmanager": "^1.0.1",
     "nativescript-loading-indicator": "^2.3.2",
